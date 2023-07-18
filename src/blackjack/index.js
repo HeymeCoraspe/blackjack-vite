@@ -1,5 +1,6 @@
 
 import _ from "underscore";
+import {crearMazo} from "./crear-mazo"
 
 //patron módulo  FUNCIÓN ANÓNIMA AUTO INVOCADA, permite que no se pueda llamar al objeto dentro de la misma ni manipularlos en cosola
 const miModulo= (()=>{
@@ -36,23 +37,6 @@ const iniciarJuego=(numeroJugadores=2)=>{
   btnPedirCarta.disabled=false;
   btnDetener.disabled=false; 
 
-}
-
-//creando el nuevo mazo
-const crearMazo= ()=>{
-  mazo=[];
-  
-  for(let i=2; i<=10; i++){
-      for (let tipo of tipos){
-          mazo.push(i+tipo);
-      }        
-  }
-  for(let tipo of tipos){
-      for(let esp of especiales){
-          mazo.push(esp+tipo);  
-      }
-  }
-  return _.shuffle(mazo); //librería underscore: _.shuffle devuelve el arreglo desordenado
 }
 
 //pidiento una carta de la baraja
