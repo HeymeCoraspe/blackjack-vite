@@ -1,6 +1,8 @@
 
 import _ from "underscore";
-import {crearMazo} from "./crear-mazo"
+import {crearMazo} from "./usecases/crear-mazo"
+import {pedirCarta} from "./usecases/pedir-carta"
+import {valorCarta} from "./usecases/valor-carta"
 
 //patron módulo  FUNCIÓN ANÓNIMA AUTO INVOCADA, permite que no se pueda llamar al objeto dentro de la misma ni manipularlos en cosola
 const miModulo= (()=>{
@@ -16,11 +18,13 @@ let puntosJugadores=[];
 
 //referencias html
 const btnPedirCarta= document.querySelector("#btnPedirCarta"), 
-    btnDetener= document.querySelector("#btnDetener"), 
-    btnNuevoJuego= document.querySelector("#btnNuevoJuego"); 
+      btnDetener= document.querySelector("#btnDetener"), 
+      btnNuevoJuego= document.querySelector("#btnNuevoJuego"); 
 
 const divCartasJugadores=document.querySelectorAll(".divCartas"),
-    puntosHTML= document.querySelectorAll("small");
+      puntosHTML= document.querySelectorAll("small");
+
+mazo= crearMazo(tipos, especiales);
 
 //función que inicia el juego
 const iniciarJuego=(numeroJugadores=2)=>{
@@ -39,20 +43,6 @@ const iniciarJuego=(numeroJugadores=2)=>{
 
 }
 
-//pidiento una carta de la baraja
-const pedirCarta=()=>{
-
-  if(mazo.length===0){
-     throw "No hay más cartas en el mazo"
-  }
-  return mazo.pop(); 
-}
-
-//asignando valores a las cartas
-const valorCarta =(carta)=>{
-      const valor= carta.substring(0,carta.length -1);
-      return(isNaN(valor))?(valor==="A") ? 11:10 : valor*1;
-}
 // 0= primero jugador, últim es computadora
 const acumularPuntos=(carta, turno)=>{
   puntosJugadores[turno]= puntosJugadores[turno]+valorCarta(carta);
