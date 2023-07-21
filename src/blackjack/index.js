@@ -1,8 +1,7 @@
 
 import _ from "underscore";
-import {crearMazo} from "./usecases/crear-mazo"
-import {pedirCarta} from "./usecases/pedir-carta"
-import {valorCarta} from "./usecases/valor-carta"
+import {crearMazo, pedirCarta, valorCarta} from "./usecases"
+
 
 //patron módulo  FUNCIÓN ANÓNIMA AUTO INVOCADA, permite que no se pueda llamar al objeto dentro de la misma ni manipularlos en cosola
 const miModulo= (()=>{
@@ -81,7 +80,7 @@ const turnoComputadora=(puntosMinimos)=>{
   let puntosComputadora=0;
 
   do{
-      const carta= pedirCarta();
+      const carta= pedirCarta(mazo);
       puntosComputadora= acumularPuntos(carta,puntosJugadores.length -1);
       crearCarta(carta,puntosJugadores.length -1);
   } while((puntosComputadora < puntosMinimos) && puntosMinimos <= 21 );
@@ -90,7 +89,8 @@ const turnoComputadora=(puntosMinimos)=>{
 }
 //eventos click
 btnPedirCarta.addEventListener("click", ()=>{ //al hacer click en el boón, se realiza la acción dentro de la función
-  const carta= pedirCarta();
+  
+  const carta= pedirCarta(mazo);
   const puntosJugador= acumularPuntos(carta, 0);
   crearCarta(carta,0);
 

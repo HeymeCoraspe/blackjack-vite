@@ -1,6 +1,4 @@
-//pidiento una carta de la baraja
-
-/**
+/**pidiento una carta de la baraja
  * 
  * @param {Array <String>} mazo arreglo string
  * @returns {String} retorna la carta que saca del mazo
